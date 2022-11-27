@@ -1,0 +1,11 @@
+server:
+ port: 8081
+
+topic:
+ name: "KafkaDemo-JSON-Topic"
+
+spring:
+ kafka:
+  consumer:
+   bootstrap-servers: "127.0.0.1:9092"
+   group-id: "demo-consumer-group2"

@@ -1,0 +1,17 @@
+server:
+ port: 9090
+
+topic:
+ name: "KafkaDemo-AVRO-Topic"
+
+spring:
+  kafka:
+   properties:
+    auto.register.schemas: true
+    value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
+    schema.registry.url: http://localhost:8081
+   producer:
+    bootstrap-servers: "127.0.0.1:9092"
+    key-serializer:    org.apache.kafka.common.serialization.StringSerializer
+    value-serializer:  io.confluent.kafka.serializers.KafkaAvroSerializer
+

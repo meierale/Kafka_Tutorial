@@ -1,0 +1,29 @@
+{
+  "type": "record",
+  "name": "Customer",
+  "namespace": "org.meierale",
+  "fields": [
+    {
+      "name": "firstName",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      }
+    },
+    {
+      "name": "lastName",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      }
+    },
+    {
+      "name": "age",
+      "type": [
+        "null",
+        "int"
+      ],
+      "default": null
+    }
+  ]
+}

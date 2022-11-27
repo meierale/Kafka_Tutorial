@@ -1,0 +1,12 @@
+[
+  {
+    "type": "record",
+    "name": "Customer",
+    "namespace": "org.meierale",
+    "fields": [
+      { "name": "firstName", "type": "string" },
+      { "name": "lastName", "type": "string" },
+      { "name": "age", "type": ["null","int"], "default": null }
+    ]
+  }
+]
