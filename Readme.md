@@ -78,13 +78,13 @@ Die Nachrichten und die Topics sind auf dem Broker ersichtlich, denn sie liegen 
 1. Was haben wir jetzt gerade getan? Resp. wo genau sind wir jetzt?
 1. `cat 00000000000000000000.log`
 
-## Tutorial 2 - Java Code Beispiele ohne Schema
+# Tutorial 2 - Java Code Beispiele ohne Schema
 
 In diesem Teil des Tutorial sind die Beispiele bereits "fertig" in den entsprechenden Demo Unterordnern abgelegt. Sie verwenden Java 11 und wurden mit IntelliJ erstellt.
 
 Es geht in den Beispielen also weniger darum, selbst Code zu schreiben, sondern darum nachzuvollziehen, was der Code macht. 
 
-### kafka-demo-consumer mit Spring Boot - klassisch, plaintext
+## kafka-demo-consumer mit Spring Boot - klassisch, plaintext
 Dieser Demo Consumer wurde als Spring Boot App mit Spring-Kafka Dependency erstellt. Er verwendet eine KafkaConfig Klasse zur Konfiguration.
 
 1. Auf  https://start.spring.io/ wurde der Rumpf für eine Spring Boot App mit Kafka erstellt
@@ -93,7 +93,7 @@ Dieser Demo Consumer wurde als Spring Boot App mit Spring-Kafka Dependency erste
 1. Die Datei `KafkaConsumer.java` (org.meierale.kafkademoconsumer.consumer) Verwendet einen KafkaListener und schreibt die plaintext Nachrichten auf die Konsole.
 1. Wird die Applikation gestartet, werden (neue) Nachrichten ausgegeben. (Schreibe dazu z.B. neue Nachrichten im CLI Console Producer in dasselbe Topic).
 
-### Kafka-Demo-JSON-Producer für Plaintext und JSON mit Spring Boot - mit POJO als Plaintext/String
+## Kafka-Demo-JSON-Producer für Plaintext und JSON mit Spring Boot - mit POJO als Plaintext/String
 Dieser Demo Producer kann sowohl Plaintext Nachrichten in das `KafkaDemo-Topic` schreiben, wie auch JSON Nachrichten in ein `KafkaDemo-JSON-Topic`. 
 
 Um Nachrichten zu schreiben stellt der Producer zwei REST Endpoints zur Verfügung:
@@ -118,7 +118,7 @@ Um Nachrichten zu schreiben stellt der Producer zwei REST Endpoints zur Verfügu
    }'
    ```
 
-### kafka-demo-consumer2 mit Spring Boot - klassisch, plaintext
+## kafka-demo-consumer2 mit Spring Boot - klassisch, plaintext
 Dieser Demo Consumer wurde ebenfalls als Spring Boot App mit Spring-Kafka Dependency erstellt. Anstelle einer eigenen KafkaConfig übernimmt der Consumer aber 
 die Konfiguration aus dem `application.yaml` File und verwendet die "Spring Boot Magie" zur Konfiguration des KafkaListeners ;-)
 
@@ -128,7 +128,7 @@ die Konfiguration aus dem `application.yaml` File und verwendet die "Spring Boot
 1. Die Datei `KafkaConsumer.java` (org.meierale.kafkademoconsumer.consumer) Verwendet einen KafkaListener und schreibt die JSON Nachrichten auf die Konsole.
 1. Wird die Applikation gestartet, werden alle Nachrichten ausgegeben, auch schon bestehende. (Erkennst du warum? Schau dir dazu den KafkaConsumer nochmals an).
 
-## Tutorial 3 - Java Code Beispiele mit AVRO
+# Tutorial 3 - Java Code Beispiele mit AVRO
 
 Auch in diesem Teil des Tutorial sind die Beispiele bereits "fertig" in den entsprechenden Demo Unterordnern abgelegt. Sie verwenden wiederum Java 11 und wurden mit IntelliJ erstellt.
 
@@ -138,7 +138,7 @@ Im Gegesatz zu den Beispielen in Tutorial 2 werden nun Nachrichten mit Avro Sche
 * Ein Consumer kann das registrierte Schema von der Schema-Registry beziehen (einfachste Variante: Copy/Paste aus dem UI)
 * Mit diesem Schema kann der Consumer die Nachrichten aus dem Topic auslesen
 
-### kafka-demo-avro-producer
+## kafka-demo-avro-producer
 Dieser Avro Demo Producer schreibt Nachrichten in das `KafkaDemo-AVRO-Topic`.
 Es handelt sich dabei um Nachrichten vom Typ/Schema "Customer". 
 
@@ -177,7 +177,7 @@ curl --location --request POST 'http://localhost:9090/publish' \
 Im Kafka UI sind dann die so geschriebenen Nachrichten im Avro Topic ersichtlich. Wobei das UI nur String 'automatisch' erkennen und darstellen kann, der Integer Wert kann nicht 'erraten' werden.
 Zudem ist in der Schema Registry das Customer Schema registriert. Es kann nun von dort von Consumer Applikationen bezogen werden.
 
-### kafka-demo-avro-consumer
+## kafka-demo-avro-consumer
 Dieser Avro Demo Consumer liest Nachrichten aus dem `KafkaDemo-AVRO-Topic`.
 Es handelt sich dabei um die vorhin produzierten Nachrichten vom Typ/Schema "Customer". 
 
