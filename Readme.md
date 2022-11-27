@@ -128,6 +128,8 @@ die Konfiguration aus dem `application.yaml` File und verwendet die "Spring Boot
 1. Die Datei `KafkaConsumer.java` (org.meierale.kafkademoconsumer.consumer) Verwendet einen KafkaListener und schreibt die JSON Nachrichten auf die Konsole.
 1. Wird die Applikation gestartet, werden alle Nachrichten ausgegeben, auch schon bestehende. (Erkennst du warum? Schau dir dazu den KafkaConsumer nochmals an).
 
+Bevor es mit den Avro Tutorials weitergeht, schau dir jetzt im Kafka UI die Topics an: http://localhost:3030/ (z.B. http://localhost:3030/kafka-topics-ui/#/)
+
 # Tutorial 3 - Java Code Beispiele mit AVRO
 
 Auch in diesem Teil des Tutorial sind die Beispiele bereits "fertig" in den entsprechenden Demo Unterordnern abgelegt. Sie verwenden wiederum Java 11 und wurden mit IntelliJ erstellt.
@@ -165,7 +167,7 @@ Allenfalls muss danach das maven Projekt neu geladen werden (Maven > Reload Proj
 
 Wird die Applikation gestartet, können mit Postman / curl Customer Nachrichten geschickt und ins Avor Topic geschrieben werden:
 ```
-curl --location --request POST 'http://localhost:9090/publish' \
+curl --location --request POST 'http://localhost:9090/avro-publish' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "firstName": "Alex",
@@ -175,7 +177,7 @@ curl --location --request POST 'http://localhost:9090/publish' \
 ```
 
 Im Kafka UI sind dann die so geschriebenen Nachrichten im Avro Topic ersichtlich. Wobei das UI nur String 'automatisch' erkennen und darstellen kann, der Integer Wert kann nicht 'erraten' werden.
-Zudem ist in der Schema Registry das Customer Schema registriert. Es kann nun von dort von Consumer Applikationen bezogen werden.
+Zudem ist in der Schema Registry das Customer Schema registriert. Es kann nun von dort von Consumer Applikationen bezogen werden (http://localhost:3030/schema-registry-ui/#/).
 
 ## kafka-demo-avro-consumer
 Dieser Avro Demo Consumer liest Nachrichten aus dem `KafkaDemo-AVRO-Topic`.
@@ -191,4 +193,19 @@ Damit aus dem Topic die Avro Schema Nachrichten ausgelesen werden können, wird 
    * Das Verhalten des Avro Maven Plugin wurde definiert (Z. 69 - 88)
      * Dabei sind insbesondere Z. 82 - 84 wichtig... warum? ;-)
 1. In `application.yaml` werden Server Port, Topic und die Spring Kafka Properties für den Consumer definiert.
+1. Das Avro Schema wurde von der Schema-Registry heruntergeladen (http://localhost:3030/schema-registry-ui/#/cluster/fast-data-dev/schema/KafkaDemo-AVRO-Topic-org.meierale.Customer/version/1) und unter src/main/resources/avro abgelegt.
 1. Der `KafkaAvroConsumer.java` liest die Daten aus dem Topic aus und schreibt sie auf die Konsole.
+
+Auch beim Consumer muss das Customer POJO aus dem heruntergeladenen Avro Schema erzeugt werden: `mvn generate-sources`
+
+## Avro Nachrichten mit cli auslesen
+Die Avro Nachrichten können natürlich auch per CLI ausgelesen werden:
+
+1. Verbinde dich dazu auf dem Terminal wieder mit dem kafka-all container (siehe Tutorial 1)
+1. Starte den kafka-avro-console-consumer:
+    ```
+    kafka-avro-console-consumer --topic KafkaDemo-AVRO-Topic \
+    --group demo-avro-group-cli --bootstrap-server localhost:9092 \
+    --from-beginning \
+    --property schema.registry.url=http://localhost:8081
+    ```
