@@ -1,4 +1,4 @@
-# Kafka Tutorial with local docker-compose 
+# Kafka Tutorial mit lokalem docker-compose und Spring Boot
 Dies ist ein bewusst sehr kurz & einfach gehaltenes mini Tutorial zu Apache Kafka. Es basiert auf einer lokalen und minimalen, Docker basierten Kafka Installation.
 
 Dieses Repository ist als Monorepo aufgebaut. Es besteht aus mehreren Unterordnern:
